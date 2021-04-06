@@ -29,7 +29,14 @@ def check_password(func):
 @check_password
 @benchmark
 def print(s):
+    s = str(s)
     n_print(s.upper())
+
+
+def fib(n):
+    if n < 3:
+        return 1
+    return fib(n-1) + fib(n-2)
 
 
 a = input()
