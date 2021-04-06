@@ -21,7 +21,18 @@ def check_password(func):
             func(*args, **kwargs)
         else:
             n_print('В доступе отказано')
-            return None
+
+    return wrapper
+
+
+def cache(func):
+    CACHE = {}
+
+    def wrapper(*args, **kwargs):
+        key = str(args) + str(kwargs)
+        if key not in CACHE:
+            CACHE[key] = func(*args, **kwargs)
+        return CACHE[key]
 
     return wrapper
 
@@ -33,11 +44,8 @@ def print(s):
     n_print(s.upper())
 
 
+@cache
 def fib(n):
     if n < 3:
         return 1
-    return fib(n-1) + fib(n-2)
-
-
-a = input()
-print(a)
+    return fib(n - 1) + fib(n - 2)
