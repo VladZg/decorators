@@ -7,10 +7,10 @@ n_print = print
 def benchmark(func):
     def wrapper(*args, **kwargs):
         start = time.time()
-        func(*args, **kwargs)
+        res = func(*args, **kwargs)
         end = time.time()
         n_print('Время выполнения: {}'.format(end - start))
-        return func(*args, **kwargs)
+        return res
 
     return wrapper
 
